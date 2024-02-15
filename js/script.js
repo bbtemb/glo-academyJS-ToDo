@@ -4,11 +4,8 @@ const todoControl = document.querySelector('.todo-control');
 const headerInput = document.querySelector('.header-input');
 const todoList = document.querySelector('.todo-list');
 const todoCompleted = document.querySelector('.todo-completed');
-let toDoData = [];
 
-JSON.parse(localStorage.getItem('usersToDo')) === null
-  ? (toDoData = [])
-  : (toDoData = JSON.parse(localStorage.getItem('usersToDo')));
+let toDoData = JSON.parse(localStorage.getItem('usersToDo')) || [];
 
 const render = function () {
   todoList.innerHTML = '';
@@ -48,9 +45,9 @@ document.addEventListener('DOMContentLoaded', render);
 
 todoControl.addEventListener('submit', function (event) {
   event.preventDefault();
-  if (headerInput.value !== '') {
+  if (headerInput.value.trim() !== '') {
     const newToDo = {
-      text: headerInput.value.trim(),
+      text: headerInput.value,
       completed: false,
     };
 
